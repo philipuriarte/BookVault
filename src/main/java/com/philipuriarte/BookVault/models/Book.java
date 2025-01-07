@@ -14,9 +14,6 @@ public class Book {
     private String author;
     private String publisher;
     private String genre;
-
-    @Column(columnDefinition = "TEXT")
-    private String description;
     private Date dateAdded;
     private String imageFileName;
 
@@ -58,14 +55,6 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Date getDateAdded() {
