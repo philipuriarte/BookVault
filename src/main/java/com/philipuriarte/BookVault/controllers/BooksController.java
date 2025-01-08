@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import services.ProductsRepository;
+import com.philipuriarte.BookVault.services.BooksRepository;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ import java.util.List;
 @RequestMapping("/books")
 public class BooksController {
     @Autowired
-    private ProductsRepository repo;
+    private BooksRepository repo;
 
     @GetMapping({"", "/"})
-    public String showProductList (Model model) {
-        List<Book> products = repo.findAll();
-        model.addAttribute("products", products);
+    public String showBookList (Model model) {
+        List<Book> books = repo.findAll();
+        model.addAttribute("books", books);
         return "books/index";
     }
 }
