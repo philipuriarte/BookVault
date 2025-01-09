@@ -137,7 +137,7 @@ public class BooksController {
                 }
 
                 // Save new image
-                MultipartFile image =   bookDto.getImageFile();
+                MultipartFile image = bookDto.getImageFile();
                 String storageFileName = image.getOriginalFilename();
 
                 try (InputStream inputStream = image.getInputStream()) {
