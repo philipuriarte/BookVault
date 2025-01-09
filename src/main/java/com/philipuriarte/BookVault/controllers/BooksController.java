@@ -17,17 +17,17 @@ public class BooksController {
     @Autowired
     private BooksRepository repo;
 
-    @GetMapping({"", "/index"})
+    @GetMapping({"", "/home"})
     public String showBookList(Model model) {
         List<Book> books = repo.findAll();
         model.addAttribute("books", books);
-        return "books/index";
+        return "books/home";
     }
 
-    @GetMapping
+    @GetMapping()
     public String showCreatePage(Model model) {
         BookDto bookDto = new BookDto();
         model.addAttribute("bookDto", bookDto);
-        return "books/AddBook";
+        return "books/addBook";
     }
 }
