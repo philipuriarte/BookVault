@@ -160,4 +160,29 @@ public class BooksController {
 
         return "redirect:/books/home";
     }
+
+    @GetMapping("/deletebook")
+    public String deleteBook (
+            @RequestParam int id
+            ) {
+        try {
+            Book book = repo.findById(id).get();
+
+            // Delete image
+            Path imagePath = Paths.get("public/images/" + book.getImageFileName());
+
+            try {
+                Files.delete(imagePath);
+            } catch (Exception ex) {
+                System.out.println("Exception: " + ex.getMessage());
+            }
+
+            // Delete book data
+            repo.delete(book);
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex.getMessage());
+        }
+
+        return "redirect:/books/home";
+    }
 }
