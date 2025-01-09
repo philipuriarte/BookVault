@@ -2,7 +2,7 @@ package com.philipuriarte.BookVault.controllers;
 
 import com.philipuriarte.BookVault.models.Book;
 import com.philipuriarte.BookVault.models.BookDto;
-import jakarta.validation.Path;
+import com.philipuriarte.BookVault.services.BooksRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.philipuriarte.BookVault.services.BooksRepository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
