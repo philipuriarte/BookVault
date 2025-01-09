@@ -24,10 +24,10 @@ public class BooksController {
         return "books/home";
     }
 
-    @GetMapping()
-    public String showCreatePage(Model model) {
+    @GetMapping("/add")
+    public String showAddPage(Model model) {
         BookDto bookDto = new BookDto();
         model.addAttribute("bookDto", bookDto);
-        return "books/addBook";
+        return "books/addbook";
     }
 }
