@@ -24,7 +24,7 @@ public class BooksController {
         return "books/home";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/addbook")
     public String showAddPage(Model model) {
         BookDto bookDto = new BookDto();
         model.addAttribute("bookDto", bookDto);
