@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
@@ -85,5 +82,30 @@ public class BooksController {
         repo.save(book);
 
         return "redirect:/books/home";
+    }
+
+    @GetMapping("/editbook")
+    public String showEditPage (
+            Model model,
+            @RequestParam int id
+            ) {
+
+        try {
+            Book book = repo.findById(id).get();
+            model.addAttribute("book", book);
+
+            BookDto bookDto = new BookDto();
+            bookDto.setTitle(book.getTitle());
+            bookDto.setAuthor(book.getAuthor());
+            bookDto.setPublisher(book.getPublisher());
+            bookDto.setGenre(book.getGenre());
+
+            model.addAttribute("bookDto", bookDto);
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex.getMessage());
+            return "redirect:/books/home";
+        }
+
+        return "books/editbook";
     }
 }

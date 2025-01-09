@@ -32,11 +32,11 @@
               <td data-th-text="${book.genre}"></td>
               <td data-th-text="${book.dateAdded.toString().substring(0,10)}"></td>
               <td>
-                <img src="" data-th-src="@{/images/{image}(image=${book.imageFileName})}" alt="Book Image" class="img-thumbnail" width="100">
+                <img src="" data-th-src="@{/images/{image}(image=${book.imageFileName})}" alt="..." class="img-thumbnail" width="100">
               </td>
               <td style="white-space:nowrap">
-                <a class="btn btn-warning btn-sm" data-th-href="@{/books/edit(id=${book.id})}">Edit</a>
-                <a class="btn btn-danger btn-sm" data-th-href="@{/books/delete(id=${book.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                <a class="btn btn-warning btn-sm" data-th-href="@{/books/editbook(id=${book.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm" data-th-href="@{/books/deletebook(id=${book.id})}" onclick="return confirm('Are you sure?')">Delete</a>
               </td>
             </tr>
           </tbody>
