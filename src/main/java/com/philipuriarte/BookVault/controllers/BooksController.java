@@ -108,4 +108,56 @@ public class BooksController {
 
         return "books/editbook";
     }
+
+    @PostMapping("/editbook")
+    public String updateBook(
+            Model model,
+            @RequestParam int id,
+            @Valid @ModelAttribute BookDto bookDto,
+            BindingResult result
+            ) {
+
+        try {
+            Book book = repo.findById(id).get();
+            model.addAttribute("book", book);
+
+            if (result.hasErrors()) {
+                return "/books/editbook";
+            }
+
+            if (!bookDto.getImageFile().isEmpty()) {
+                // Delete old image
+                String uploadDir = "public/images/";
+                Path oldImagePath = Paths.get(uploadDir + book.getImageFileName());
+
+                try {
+                    Files.delete(oldImagePath);
+                } catch (Exception ex) {
+                    System.out.println("Exception: " + ex.getMessage());
+                }
+
+                // Save new image
+                MultipartFile image =   bookDto.getImageFile();
+                String storageFileName = image.getOriginalFilename();
+
+                try (InputStream inputStream = image.getInputStream()) {
+                    Files.copy(inputStream, Paths.get(uploadDir + storageFileName),
+                            StandardCopyOption.REPLACE_EXISTING);
+                }
+
+                book.setImageFileName(storageFileName);
+            }
+
+            book.setTitle(bookDto.getTitle());
+            book.setAuthor(bookDto.getAuthor());
+            book.setPublisher(bookDto.getPublisher());
+            book.setGenre(bookDto.getGenre());
+
+            repo.save(book);
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex.getMessage());
+        }
+
+        return "redirect:/books/home";
+    }
 }
